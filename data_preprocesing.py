@@ -15,6 +15,6 @@ X = data_encoded[:,0:-1]
 y = data_encoded[:,-1]
 
 
-data_encoded.to_csv("mushroom_preprocessed.csv")
+pd.DataFrame(data_encoded).to_csv("mushroom_preprocessed.csv")
 
 
