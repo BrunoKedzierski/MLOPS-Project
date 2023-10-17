@@ -11,12 +11,14 @@ def drop_missing_data(data, col_names):
 
 def encode_data(data):
     enc = OrdinalEncoder()
-    data_encoded = enc.fit_transform(data)
+    for col in data.select_dtypes(include=['object']).columns:
+       data[[col]] = enc.fit_transform(data[[col]] )
     return data
 
 
-# X = data_encoded[:,0:-1]
-# y = data_encoded[:,-1]
-# pd.DataFrame(data_encoded).to_csv("mushroom_preprocessed.csv")
+def preprocess_data(data, col_names):
+   data = drop_missing_data(data,col_names)
+   return encode_data(data)
+
 
 
