@@ -1,3 +1,7 @@
+"""
+This is a boilerplate pipeline 'data_processing'
+generated using Kedro 0.18.14
+"""
 import pandas as pd
 from sklearn.preprocessing import OrdinalEncoder
 
@@ -19,6 +23,3 @@ def encode_data(data):
 def preprocess_data(data, col_names):
    data = drop_missing_data(data,col_names)
    return encode_data(data)
-
-
-
