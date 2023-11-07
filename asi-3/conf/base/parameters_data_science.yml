@@ -3,6 +3,34 @@
 #
 # Documentation for this file format can be found in "Parameters"
 # Link: https://docs.kedro.org/en/0.18.14/configuration/parameters.html
-test_size: 0.2
-val_size: 0.2
-target_var_name: 'poisonous'
+model_options:
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 3
+  target_var_name: poisonous
+  features:
+    - cap-shape
+    - cap-surface
+    - cap-color
+    - bruises
+    - odor
+    - gill-attachment
+    - gill-spacing
+    - gill-size
+    - gill-color
+    - stalk-shape
+    - stalk-surface-above-ring
+    - stalk-surface-below-ring
+    - stalk-color-above-ring
+    - stalk-color-below-ring
+    - veil-type
+    - veil-color
+    - ring-number
+    - ring-type
+    - spore-print-color
+    - population
+    - habitat
+  kernel: poly
+
+
+

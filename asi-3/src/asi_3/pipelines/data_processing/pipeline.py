@@ -12,7 +12,7 @@ def create_pipeline(**kwargs) -> Pipeline:
          node(
                 func=preprocess_data,
                 inputs=["mushrooms", "params:rm_cols"],
-                outputs="mushrooms_processed",
+                outputs="preprocessed_mushrooms",
                 name="mushrooms_processed_node",
             )
 

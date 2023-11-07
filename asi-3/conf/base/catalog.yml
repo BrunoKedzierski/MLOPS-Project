@@ -6,6 +6,12 @@ mushrooms:
   type: pandas.CSVDataSet
   filepath: https://archive.ics.uci.edu/static/public/73/data.csv
 
+preprocessed_mushrooms:
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/preprocessed_mushrooms.pq
+
+
+
 classifer:
   type: pickle.PickleDataSet
   filepath: data/06_models/svc_1.pickle
