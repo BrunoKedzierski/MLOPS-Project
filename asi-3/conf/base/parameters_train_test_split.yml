@@ -1,0 +1,11 @@
+# This is a boilerplate parameters config generated for pipeline 'train_test_split'
+# using Kedro 0.18.14.
+#
+# Documentation for this file format can be found in "Parameters"
+# Link: https://docs.kedro.org/en/0.18.14/configuration/parameters.html
+dataset_choice:
+  rebalance: undersampled
+  target_var_name: y
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 3
