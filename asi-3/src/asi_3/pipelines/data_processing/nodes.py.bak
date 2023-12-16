@@ -27,14 +27,12 @@ def drop_impute_missing_data(data):
    print(categorical_columns)
    print(numerical_columns)
     # Impute categorical columns
-   if not categorical_columns.empty: 
-      categorical_imputer = SimpleImputer(strategy='most_frequent')
-      data[categorical_columns] = categorical_imputer.fit_transform(data[categorical_columns])
+   categorical_imputer = SimpleImputer(strategy='most_frequent')
+   data[categorical_columns] = categorical_imputer.fit_transform(data[categorical_columns])
 
     # Impute numerical columns
-   if not numerical_columns.empty:  
-      numerical_imputer = SimpleImputer(strategy='mean')
-      data[numerical_columns] = numerical_imputer.fit_transform(data[numerical_columns])
+   numerical_imputer = SimpleImputer(strategy='mean')
+   data[numerical_columns] = numerical_imputer.fit_transform(data[numerical_columns])
 
    return data
    

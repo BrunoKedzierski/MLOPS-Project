@@ -1,0 +1,54 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.10.13",
+    "heartbeatAt": "2023-12-16T21:53:52.625898",
+    "startedAt": "2023-12-16T21:53:50.628874",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "run"
+    ],
+    "state": "running",
+    "program": "-m __main__",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/BrunoKedzierski/asi_project_3.git",
+        "commit": "374f76a448bb5dc73afa31a43c8cae201cdbd50a"
+    },
+    "email": "bruno.kedzierski@wp.pl",
+    "root": "E:/Desktop/g/asi_project_3",
+    "host": "DESKTOP-SU5PG5A",
+    "username": "bruno",
+    "executable": "C:\\Users\\bruno\\anaconda3\\envs\\asi_env\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2800.0,
+        "min": 0.0,
+        "max": 3400.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2800.0,
+            "min": 0.0,
+            "max": 3400.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 931.4609336853027,
+            "used": 655.9696311950684
+        }
+    },
+    "gpu": "NVIDIA GeForce GTX 1050 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1050 Ti",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 23.951309204101562
+    }
+}
