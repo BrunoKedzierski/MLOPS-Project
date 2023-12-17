@@ -27,18 +27,17 @@ def train_model(train, parameters):
             kernel=parameters["kernel"], random_state=parameters["random_state"]
         )
     elif model_type == "logistic":
-        clf = LogisticRegression(random_state=parameters["random_state"])
+        clf = LogisticRegression(random_state=parameters["random_state"], max_iter=10000)
     elif model_type == "random_forest":
         clf = RandomForestClassifier(
             n_estimators=parameters["n_estimators"],
             random_state=parameters["random_state"],
         )
-   
+
     X_train = train.iloc[:, :-1]
     y_train = train.iloc[:, -1]
 
-
-
     clf.fit(X_train, y_train.values.ravel())
+    print("DATA_SCIENCE")
+    X_train.info()
     return clf
-
