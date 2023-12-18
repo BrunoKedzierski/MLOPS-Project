@@ -12,6 +12,8 @@ conf/**/*credentials*
 # ignore everything in the following folders
 data/**
 logs/**
+AutogluonModels/**
+wandb/**
 
 # except their sub-folders
 !data/**/
