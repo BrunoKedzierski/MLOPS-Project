@@ -24,6 +24,6 @@ def register_pipelines() -> dict[str, Pipeline]:
     return {
         "dp": data_processing_pipeline,
         "ds": data_science_pipeline,
-        "__default__": data_processing_pipeline + train_test_split_pipeline +automl_pipeline + eval_pipeline
+        "__default__": data_processing_pipeline + train_test_split_pipeline +data_science_pipeline + eval_pipeline
 
     }

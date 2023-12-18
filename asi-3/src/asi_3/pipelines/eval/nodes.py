@@ -49,7 +49,6 @@ def log_results(y_test, y_pred, y_probas,parameters, model):
 
     #wandb.sklearn.plot_roc(y_test, y_probas, y_test.unique())
     wandb.sklearn.plot_feature_importances(model)
-
     wandb.sklearn.plot_confusion_matrix(y_test, y_pred, y_test.unique())
 
 
