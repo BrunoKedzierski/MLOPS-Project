@@ -42,26 +42,52 @@ with st.expander("kedro"):
         answer = session.run(pipeline)
         session.load_context()
 
-st.header("Data Check")
-
-with st.expander("Test Data"):
-    client = bank_client
-    client.age = st.slider("Choose age:", min_value=0, max_value=100)
-    client.job = st.selectbox("Choose job:", ['management', 'technician', 'entrepreneur', 'blue-collar',  'retired', 'admin.',
+st.header("Results Filter")
+with st.expander("Filter results by:"):
+    clientFilter = bank_client
+    clientFilter.age = st.slider("Choose age:", min_value=0, max_value=100, value=(0, 100))
+    clientFilter.job = st.multiselect("Choose job:", ['management', 'technician', 'entrepreneur', 'blue-collar', 'retired', 'admin.',
+                                              'services', 'self-employed', 'unemployed', 'housemaid', 'student'], default=['management', 'technician', 'entrepreneur', 'blue-collar', 'retired', 'admin.',
                                               'services', 'self-employed', 'unemployed', 'housemaid', 'student'])
-    client.marital = st.selectbox("Choose marital:", ['married', 'single', 'divorced'])
-    client.education = st.selectbox("Choose education:", ['tertiary', 'secondary', 'primary'])
-    client.default = st.selectbox("Choose default:", ["yes", "no"])
-    client.balance = st.slider("Choose balance:", min_value=-8019, max_value=102127)
-    client.housing = st.selectbox("Choose housing:", ["yes", "no"])
-    client.loan = st.selectbox("Choose loan:", ["yes", "no"])
-    client.day_of_week = st.slider("Choose day:", min_value=1, max_value=31)
-    client.month = st.select_slider("Choose month:", ["January", "February", "March", "April", "May", "June", "July",
-                                                     "August", "September", "October", "November", "December"]).lower()[:3]
-    client.duration = st.slider("Choose duration:", min_value=0, max_value=4918)
-    client.campaign = st.slider("Choose campaign:", min_value=1, max_value=63)
-    client.pdays = st.slider("Choose pdays:", min_value=-1, max_value=873)
-    client.previous = st.slider("Choose previous:", min_value=0, max_value=275)
+    clientFilter.marital = st.multiselect("Choose marital:", ['married', 'single', 'divorced'], default=['married', 'single', 'divorced'])
+    clientFilter.education = st.multiselect("Choose education:", ['tertiary', 'secondary', 'primary'],default=['tertiary', 'secondary', 'primary'])
+    clientFilter.default = st.multiselect("Choose default:", ["yes", "no"], default=["yes", "no"])
+    clientFilter.balance = st.slider("Choose balance:", min_value=-8019, max_value=102127, value=(-8019, 102127))
+    clientFilter.housing = st.multiselect("Choose housing:", ["yes", "no"], default=["yes", "no"])
+    clientFilter.loan = st.multiselect("Choose loan:", ["yes", "no"], default=["yes", "no"])
+    clientFilter.day_of_week = st.slider("Choose day:", min_value=1, max_value=31, value=(1, 31))
+    clientFilter.month = st.multiselect("Choose month:", ["January", "February", "March", "April", "May", "June", "July",
+                                                     "August", "September", "October", "November", "December"], default=["January", "February", "March", "April", "May", "June", "July",
+                                                     "August", "September", "October", "November", "December"])
+    clientFilter.duration = st.slider("Choose duration:", min_value=0, max_value=4918, value=(0, 4918))
+    clientFilter.campaign = st.slider("Choose campaign:", min_value=1, max_value=63, value=(1, 63))
+    clientFilter.pdays = st.slider("Choose pdays:", min_value=-1, max_value=873, value=(1, 873))
+    clientFilter.previous = st.slider("Choose previous:", min_value=0, max_value=275, value=(0, 275))
+
+st.header("Specific result for single entry")
+with st.expander("Test Specific Results"):
+    clientTest = bank_client
+    clientTest.age = st.slider("Choose age:", min_value=0, max_value=100)
+    clientTest.job = st.selectbox("Choose job:",
+                                  ['management', 'technician', 'entrepreneur', 'blue-collar', 'retired', 'admin.',
+                                   'services', 'self-employed', 'unemployed', 'housemaid', 'student'])
+    clientTest.marital = st.selectbox("Choose marital:", ['married', 'single', 'divorced'])
+    clientTest.education = st.selectbox("Choose education:", ['tertiary', 'secondary', 'primary'])
+    clientTest.default = st.selectbox("Choose default:", ["yes", "no"])
+    clientTest.balance = st.slider("Choose balance:", min_value=-8019, max_value=102127)
+    clientTest.housing = st.selectbox("Choose housing:", ["yes", "no"])
+    clientTest.loan = st.selectbox("Choose loan:", ["yes", "no"])
+    clientTest.day_of_week = st.slider("Choose day:", min_value=1, max_value=31)
+    clientTest.month = st.select_slider("Choose month:",
+                                        ["January", "February", "March", "April", "May", "June", "July",
+                                         "August", "September", "October", "November", "December"]).lower()[:3]
+    clientTest.duration = st.slider("Choose duration:", min_value=0, max_value=4918)
+    clientTest.campaign = st.slider("Choose campaign:", min_value=1, max_value=63)
+    clientTest.pdays = st.slider("Choose pdays:", min_value=-1, max_value=873)
+    clientTest.previous = st.slider("Choose previous:", min_value=0, max_value=275)
+
+#run = wandb.init(project="bank_dataset")
+
 
 
 
