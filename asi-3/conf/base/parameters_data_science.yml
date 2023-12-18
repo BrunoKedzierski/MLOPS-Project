@@ -1,15 +1,7 @@
-# This is a boilerplate parameters config generated for pipeline 'data_science'
-# using Kedro 0.18.14.
-#
-# Documentation for this file format can be found in "Parameters"
-# Link: https://docs.kedro.org/en/0.18.14/configuration/parameters.html
 model_options:
-  random_state: 3
   features: all
   kernel: poly
-  rebalance: undersampled
   model_type: logistic
   n_estimators: 150
-
-
-
+  random_state: 3
+  rebalance: undersampled

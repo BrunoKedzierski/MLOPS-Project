@@ -43,53 +43,41 @@ def log_results(y_test, y_pred, y_probas,parameters, model):
     # print(hyperparameters)
     # run = wandb.init(project="bank_dataset", config=hyperparameters)
 
-    print("TEST-3")
+
     run = wandb.init(project="bank_dataset")
 
-    print("TEST-2")
-    # wandb.sklearn.plot_roc(y_test, y_probas, y_test.unique())
+
+    #wandb.sklearn.plot_roc(y_test, y_probas, y_test.unique())
     wandb.sklearn.plot_feature_importances(model)
-    print("TEST-1")
+
     wandb.sklearn.plot_confusion_matrix(y_test, y_pred, y_test.unique())
 
-    print("TEST0")
+
 
     wandb.summary["accuracy"] = accuracy
     wandb.summary["recall"] = recall
     wandb.summary["precision"] = precision
 
 
-    print("TEST1")
+
     model_artifact = wandb.Artifact(name='classifier', type='model')
-    print("TEST2")
     model_artifact.add_file('data/06_models/classifier_1.pkl', name='classifier.pkl')
-    print("TEST3")
     encoder_artifact = wandb.Artifact(name='encoder', type='model')
-    print("TEST4")
     encoder_artifact.add_file('data/06_models/encoder_1.pkl', name='encoder.pkl')
-    print("TEST5")
+
 
     raw_data = wandb.Artifact(name='raw_bank_data', type='dataset')
-    print("TEST6")
     raw_data.add_file('data/01_raw/bank_raw.pq')
-    print("TEST7")
+
     train_test_data = wandb.Artifact(name='train_test_bank_data', type='dataset')
-    print("TEST8")
     if parameters["rebalance"] == "undersampled":
         train_test_data.add_file('data/02_intermediate/preprocessed_undersampled_bank.pq', name='train_test_bank_data.pq')
-        print("TEST9")
     else:
         train_test_data.add_file('data/02_intermediate/preprocessed_oversampled_bank.pq', name='train_test_bank_data.pq')
-        print("TEST10")
 
-    print("TEST 11")
 
     run.log_artifact(raw_data)
-    print("TEST 12")
     run.log_artifact(train_test_data)
-    print("TEST 13")
 
     run.log_artifact(model_artifact)
-    print("TEST 14")
     run.log_artifact(encoder_artifact)
-    print("TEST 15")
