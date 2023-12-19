@@ -546,3 +546,6 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,vs,visualstudiocode
+.idea/asi_project_3.iml
+.idea/modules.xml
+.idea/vcs.xml

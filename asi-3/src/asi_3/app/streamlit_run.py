@@ -1,11 +1,21 @@
 from kedro.framework.session import KedroSession
 from kedro.framework.startup import bootstrap_project
-
 import yaml
 import streamlit as st
 import os
-import wandb
+# import wandb
 import bank_client
+
+# from typing import Union
+# from fastapi import FastAPI
+# from pydantic import BaseModel
+# # import wandb
+# import pickle
+# from bank_client import Bank_Client
+# import pyarrow.parquet as pq
+# import uvicorn
+# import pandas as pd
+# from autogluon.tabular import  TabularPredictor
 
 bootstrap_project(os.getcwd())
 session = KedroSession.create()
@@ -20,7 +30,7 @@ with st.expander("kedro"):
     model_type = st.selectbox("Select model_type:", ["logistic", "OTHER CHOICES"])
     n_estimators = st.slider("Select n_estimators", min_value=100, max_value=500, value=150)
 
-    with open("./conf/base/parameters_data_science.yml", "w") as f:
+    with open("../../../conf/base/parameters_data_science.yml", "w") as f:
         yaml.dump({"model_options": {"random_state": random_state, "features": "all", "kernel": kernel,
                                      "rebalance": rebalance, "model_type": model_type, "n_estimators": n_estimators}}, f)
 
@@ -33,7 +43,7 @@ with st.expander("kedro"):
     st.header("Wandblogin")
     input_text = st.text_area("Paste wandb API KEY:", value="", height=200)
 
-    with open("./conf/base/parameters_train_test_split.yml", "w") as f:
+    with open("../../../conf/base/parameters_train_test_split.yml", "w") as f:
         yaml.dump({"dataset_choice": {"rebalance": rebalance_split, "target_var_name": "y", "test_size": 0.2,
                                       "val_size": 0.2, "random_state": random_state_split}}, f)
 
@@ -54,6 +64,7 @@ with st.expander("Filter results by:"):
     clientFilter.default = st.multiselect("Choose default:", ["yes", "no"], default=["yes", "no"])
     clientFilter.balance = st.slider("Choose balance:", min_value=-8019, max_value=102127, value=(-8019, 102127))
     clientFilter.housing = st.multiselect("Choose housing:", ["yes", "no"], default=["yes", "no"])
+    clientFilter.contact = st.multiselect("Choose contact:", ["cellular", "telephone"], default=["cellular", "telephone"])
     clientFilter.loan = st.multiselect("Choose loan:", ["yes", "no"], default=["yes", "no"])
     clientFilter.day_of_week = st.slider("Choose day:", min_value=1, max_value=31, value=(1, 31))
     clientFilter.month = st.multiselect("Choose month:", ["January", "February", "March", "April", "May", "June", "July",
@@ -76,6 +87,7 @@ with st.expander("Test Specific Results"):
     clientTest.default = st.selectbox("Choose default:", ["yes", "no"])
     clientTest.balance = st.slider("Choose balance:", min_value=-8019, max_value=102127)
     clientTest.housing = st.selectbox("Choose housing:", ["yes", "no"])
+    clientTest.contact = st.selectbox("Choose housing:", ["cellular", "telephone"])
     clientTest.loan = st.selectbox("Choose loan:", ["yes", "no"])
     clientTest.day_of_week = st.slider("Choose day:", min_value=1, max_value=31)
     clientTest.month = st.select_slider("Choose month:",
@@ -85,9 +97,7 @@ with st.expander("Test Specific Results"):
     clientTest.campaign = st.slider("Choose campaign:", min_value=1, max_value=63)
     clientTest.pdays = st.slider("Choose pdays:", min_value=-1, max_value=873)
     clientTest.previous = st.slider("Choose previous:", min_value=0, max_value=275)
-
-#run = wandb.init(project="bank_dataset")
-
-
+    st.write(clientTest)
+    # st.write(Apiwandb.predict_client(clientTest))
 
 
