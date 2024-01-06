@@ -31,7 +31,7 @@ with st.expander("kedro"):
     model_type = st.selectbox("Select model_type:", ["logistic", "OTHER CHOICES"])
     n_estimators = st.slider("Select n_estimators", min_value=100, max_value=500, value=150)
 
-    with open("conf/base/parameters_data_science.yml", "w") as f:
+    with open("asi-3/conf/base/parameters_data_science.yml", "w") as f:
         yaml.dump({"model_options": {"random_state": random_state, "features": "all", "kernel": kernel,
                                      "rebalance": rebalance, "model_type": model_type, "n_estimators": n_estimators}}, f)
 
@@ -44,7 +44,7 @@ with st.expander("kedro"):
     st.header("Wandblogin")
     input_text = st.text_area("Paste wandb API KEY:", value="", height=200)
 
-    with open("conf/base/parameters_data_processing.yml", "w") as f:
+    with open("asi-3/conf/base/parameters_data_processing.yml", "w") as f:
         yaml.dump({"dataset_choice": {"rebalance": rebalance_split, "target_var_name": "y", "test_size": 0.2,
                                       "val_size": 0.2, "random_state": random_state_split}}, f)
 
