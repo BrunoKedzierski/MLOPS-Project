@@ -549,3 +549,17 @@ MigrationBackup/
 .idea/asi_project_3.iml
 .idea/modules.xml
 .idea/vcs.xml
+
+
+/artifacts/
+
+/data/01_raw/*
+/data/02_intermediate/*
+/data/03_primary/*
+/data/06_models/*
+
+
+!/data/01_raw/.gitkeep 
+!/data/02_intermediate/.gitkeep 
+!/data/03_primary/.gitkeep 
+!/data/06_models/.gitkeep 
