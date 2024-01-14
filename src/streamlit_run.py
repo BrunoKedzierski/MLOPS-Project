@@ -17,7 +17,7 @@ with st.expander("kedro"):
     random_state = st.slider("Select random_state", min_value=1, max_value=10, value=3)
     kernel = st.select_slider("Select kernel", ["linear", "poly", "rbf", "sigmoid"], value="poly")
     rebalance = st.selectbox("Select rebalance:", ["undersampled", "oversampled"])
-    model_type = st.selectbox("Select model_type:", ["logistic", "OTHER CHOICES"])
+    model_type = st.selectbox("Select model_type:", ["logistic", "svc", "random_forest"])
     n_estimators = st.slider("Select n_estimators", min_value=100, max_value=500, value=150)
 
     with open("conf/base/parameters_data_science.yml", "w") as f:
@@ -33,14 +33,22 @@ with st.expander("kedro"):
     st.header("Wandblogin")
     input_text = st.text_area("Paste wandb API KEY:", value="", height=200)
 
-    with open("conf/base/parameters_data_processing.yml", "w") as f:
-        yaml.dump({"dataset_choice": {"rebalance": rebalance_split, "target_var_name": "y", "test_size": 0.2,
-                                      "val_size": 0.2, "random_state": random_state_split}}, f)
-
     pipeline = st.select_slider("Select pipeline", ["__default__", "dp", "ds"], value="__default__")
     if st.button("Get Answer!"):
-        answer = session.run(pipeline)
-        session.load_context()
+        with st.spinner("Running pipeline and updating backend..."):
+            # answer = session.run(pipeline)
+            # session.load_context()
+        
+        
+            # Send GET request to FastAPI endpoint
+            response = requests.get('http://localhost:8001/downloadmodels')
+
+            # Check if the request was successful (status code 200)
+            if response.status_code == 200:
+                st.success("Models downloaded successfully!")
+            else:
+                st.error(f"Failed to download models. Status code: {response.status_code}")
+
 
 st.header("Predict")
 with st.expander("Test Specific Results"):
@@ -70,8 +78,9 @@ with st.expander("Test Specific Results"):
                   day_of_week=day_of_week, month=month, duration=duration,
                   campaign=campaign, pdays=pdays, previous=previous)
     if st.button("Predict!"):
-        response = requests.post('http://localhost:8001/predict/client', json=req.dict()).json()
-        st.metric(label="Probability", value=response.get('probabilityA', None) )
-        my_bar = st.progress(float(response.get('probabilityA', None)), text="Probablity of true vs. false")
-        st.write(response)
+        prediction_response = requests.post('http://localhost:8001/predict/client', json=req.dict()).json()
+        modelinfo_response = requests.get('http://localhost:8001/modelinfo').json()
+        my_bar = st.progress(float(prediction_response.get('probabilityA', None)), text="Probablity of true vs. false")
+        st.write(prediction_response)
+        st.write(modelinfo_response)
     

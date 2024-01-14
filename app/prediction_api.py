@@ -10,23 +10,24 @@ from autogluon.tabular import  TabularPredictor
 
 
 
+
+
+
+
 app = FastAPI()
 api = wandb.Api()
-artifact = api.artifact("asi_grupa_3/bank_dataset/classifier:latest")
-model = artifact.download()
+model_artifact = api.artifact("asi_grupa_3/bank_dataset/classifier:latest")
+encoder_artifact = api.artifact("asi_grupa_3/bank_dataset/encoder:latest")
+model = model_artifact.download()
 loaded_model = pickle.load(open(f'{model}\classifier.pkl', 'rb'))
 
-
-print(f"Model type: {type(loaded_model)}")
-
-artifact = api.artifact("asi_grupa_3/bank_dataset/encoder:latest")
-encoder = artifact.download()
+encoder = encoder_artifact.download()
 loaded_encoder = pickle.load(open(f'{encoder}\encoder.pkl', 'rb'))
 
 
-artifact = api.artifact("asi_grupa_3/bank_dataset/train_test_bank_data:latest")
-dataset = artifact.download()
-df = pq.read_table(source=f'{dataset}\\train_test_bank_data.pq').to_pandas()
+
+
+
 
 
 
@@ -36,8 +37,27 @@ def read_root():
     return {"Hello": "World"}
 
 
+@app.get("/downloadmodels")
+def read_root():
+    global loaded_model, loaded_encoder
+    model =  model_artifact.download()
+    loaded_model = pickle.load(open(f'{model}\classifier.pkl', 'rb'))
+    
+    encoder =  encoder_artifact.download()
+    loaded_encoder =  pickle.load(open(f'{encoder}\encoder.pkl', 'rb'))
+
+
+@app.get("/modelinfo")
+def show_model_info():
+    return {"model_ver": model_artifact.version,
+            "model_name": model_artifact.name,
+            "model_type": type(loaded_model).__name__,
+            "model_meta": model_artifact.metadata}
+
+
 @app.post("/predict/client")
 def predict_client(data: Bank_Client):
+    
     data = data.dict()
     dframe = pd.DataFrame(data, index=[0])
     dframe['y'] = 'no'
@@ -49,12 +69,6 @@ def predict_client(data: Bank_Client):
     prediction =loaded_model.predict(dframe.iloc[:, :-1])
     prob = loaded_model.predict_proba(dframe.iloc[:, :-1])
 
-    # if isinstance(loaded_model, TabularPredictor):
-       
-    #     prediction =loaded_model.predict(dframe.iloc[:, :-1])
-    # else:
-    #     prediction = loaded_model.predict(dframe.iloc[:, :-1].values)
-    #     prob = loaded_model.predict_proba(dframe.iloc[:, :-1].values)
 
 
     
