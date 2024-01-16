@@ -33,7 +33,7 @@ with st.expander("kedro"):
     st.header("Wandblogin")
     input_text = st.text_area("Paste wandb API KEY:", value="", height=200)
 
-    pipeline = st.select_slider("Select pipeline", ["__default__", "dp", "ds"], value="__default__")
+    pipeline = st.select_slider("Select pipeline", ["__default__", "dp", "ds","syn"], value="__default__")
     if st.button("Get Answer!"):
         with st.spinner("Running pipeline and updating backend..."):
             # answer = session.run(pipeline)
