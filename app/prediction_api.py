@@ -61,12 +61,12 @@ def receive_parameters(data: dict):
  
     data_science_params = data.get("data_science_params")
     split_params = data.get("split_params")
-
+    pipeline = data.get("pipeline")
         # Process the received parameters and write to YAML files
     write_data_science_params(data_science_params)
     write_split_params(split_params)
 
-    answer = session.run("__default__")
+    answer = session.run(pipeline)
     session.load_context()
         
     return {"message": "Parameters received and YAML files written successfully!"}

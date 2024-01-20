@@ -26,6 +26,7 @@ with st.expander("kedro"):
            
                           
             data = {
+                 "pipeline" : pipeline,
                 "data_science_params": {
                     "random_state": random_state,
                     "kernel": kernel,
