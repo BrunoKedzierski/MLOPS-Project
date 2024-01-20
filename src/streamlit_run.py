@@ -20,7 +20,7 @@ with st.expander("kedro"):
     rebalance_split = st.selectbox("Select_rebalance:", ["undersampled", "oversampled"])
 
 
-    pipeline = st.select_slider("Select pipeline", ["__default__", "dp", "ds"], value="__default__")
+    pipeline = st.select_slider("Select pipeline", ["__default__", "dp", "ds","syn"], value="__default__")
     if st.button("Get Answer!"):
         with st.spinner("Running pipeline and updating backend..."):
            
