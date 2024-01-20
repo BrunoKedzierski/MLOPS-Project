@@ -563,3 +563,7 @@ MigrationBackup/
 !/data/02_intermediate/.gitkeep 
 !/data/03_primary/.gitkeep 
 !/data/06_models/.gitkeep 
+/src/wandb/*
+*.bak
+*.log
+*.flake8

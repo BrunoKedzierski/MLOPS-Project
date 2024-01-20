@@ -24,7 +24,7 @@ def train_model(train, parameters):
 
     if model_type == "svc":
         clf = svm.SVC(
-            kernel=parameters["kernel"], random_state=parameters["random_state"]
+            kernel=parameters["kernel"], random_state=parameters["random_state"], probability=True
         )
     elif model_type == "logistic":
         clf = LogisticRegression(random_state=parameters["random_state"], max_iter=10000)

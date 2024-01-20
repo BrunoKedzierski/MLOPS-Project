@@ -74,9 +74,9 @@ def log_results(y_test, y_pred, y_probas,parameters, model):
     else:
         train_test_data.add_file('data/02_intermediate/preprocessed_oversampled_bank.pq', name='train_test_bank_data.pq')
 
+        
+    run.log_artifact(raw_data,aliases = ["latest"])
+    run.log_artifact(train_test_data,aliases = ["latest"])
 
-    run.log_artifact(raw_data)
-    run.log_artifact(train_test_data)
-
-    run.log_artifact(model_artifact)
-    run.log_artifact(encoder_artifact)
+    run.log_artifact(model_artifact,aliases = ["latest"])
+    run.log_artifact(encoder_artifact,aliases = ["latest"])
