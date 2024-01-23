@@ -1,9 +1,10 @@
-from faker import Faker
+from sdv.single_table import GaussianCopulaSynthesizer
+
 import pandas as pd
 import numpy as np
 from numpy import random
 
-fake = Faker()
+
 
 
 data_job = ['management', 'technician', 'entrepreneur', 'blue-collar', 'retired', 'admin.',
@@ -63,5 +64,9 @@ df = pd.DataFrame(zip(age,job,marital,education,default,balance,housing,loan,con
        'pdays', 'previous', 'y'])
 print(df)
 
+
+
+gaussian_model = GaussianCopulaSynthesizer()
+gaussian_model.fit(df.iloc[:1000])
 
 

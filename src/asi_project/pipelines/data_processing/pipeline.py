@@ -18,7 +18,7 @@ def create_pipeline(**kwargs) -> Pipeline:
          node(
                 func=preprocess_data,
                 inputs=["bank_raw"],
-                outputs=["preprocessed_oversampled_bank","preprocessed_undersampled_bank", "data_encoder"],
+                outputs=["preprocessed_oversampled_bank","preprocessed_undersampled_bank", "data_encoder","syndata"],
                 name="bank_processed_node",
             )
 

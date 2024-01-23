@@ -58,9 +58,9 @@ def encode_data(data):
 
 def preprocess_data(data):
     print(data["contact"].unique())
-    data = drop_impute_missing_data(data)
-    data, enc = encode_data(data)
-    oversampled, undersampled = rebalance_data(data)
+    dataChanged = drop_impute_missing_data(data)
+    dataChanged, enc = encode_data(dataChanged)
+    oversampled, undersampled = rebalance_data(dataChanged)
 
 
-    return oversampled, undersampled, enc
+    return oversampled, undersampled, enc, data
