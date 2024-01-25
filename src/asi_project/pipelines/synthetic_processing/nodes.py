@@ -32,16 +32,15 @@ def encode_data(data):
     return data, enc
 
 
-def synthetic(data):
-    gaussian_model = GaussianCopulaSynthesizer()
-    gaussian_model.fit(data.iloc[:1000])
-    return gaussian_model
+def synthetic(data, rows):
+    synthesizer = GaussianCopulaSynthesizer(data.columns)
+    synthesizer.fit(data)
+    synthetic_data = synthesizer.sample(num_rows=rows)
+    return synthetic_data
 
 
-def preprocess_data(data):
-    print("TEST")
-    data = synthetic(data)
-
+def preprocess_data(data, rows):
+    data = synthetic(data, rows)
     print(data["contact"].unique())
     data, enc = encode_data(data)
     oversampled, undersampled = rebalance_data(data)

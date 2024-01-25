@@ -11,8 +11,8 @@ def create_pipeline(**kwargs) -> Pipeline:
     return pipeline([
          node(
                 func=preprocess_data,
-                inputs=["syndata"],
-                outputs=["preprocessed_oversampled_bank1","preprocessed_undersampled_bank1", "data_encoder1"],
+                inputs=["syndata",,"params:_choice"],
+                outputs=["preprocessed_oversampled_bank2","preprocessed_undersampled_bank2", "data_encoder2", "syntheticdataset"],
                 name="synned_node",
             )
 
