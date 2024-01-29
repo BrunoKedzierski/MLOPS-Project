@@ -109,10 +109,11 @@ def predict_client(data: Bank_Client):
     prediction = model_handler.loaded_model.predict(dframe.iloc[:, :-1])
     prob = model_handler.loaded_model.predict_proba(dframe.iloc[:, :-1])
 
+    prediction = 'Will take credit' if prediction[0] == 1.0  else "Will not take credit"
     return {
-        'prediction': prediction[0],
-        'probabilityA': prob[0][0],
-        'probabilityB': prob[0][1]
+        'prediction': prediction,
+        'probabilityA': f"Probability A: { prob[0][0] * 100:.2f}%",
+        'probabilityB': f"Probability B: { prob[0][1] * 100:.2f}%"
     }
 
 if __name__ == '__main__':

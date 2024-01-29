@@ -549,7 +549,7 @@ MigrationBackup/
 .idea/asi_project_3.iml
 .idea/modules.xml
 .idea/vcs.xml
-
+.idea/
 
 /artifacts/
 

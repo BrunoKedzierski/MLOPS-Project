@@ -21,7 +21,7 @@ with st.expander("kedro"):
 
 
     pipeline = st.select_slider("Select pipeline", ["__default__", "dp", "ds","syn"], value="__default__")
-    if st.button("Get Answer!"):
+    if st.button("Run the pipeline!"):
         with st.spinner("Running pipeline and updating backend..."):
            
                           
@@ -89,7 +89,18 @@ with st.expander("Test Specific Results"):
     if st.button("Predict!"):
         prediction_response = requests.post('http://localhost:8001/predict/client', json=req.dict()).json()
         modelinfo_response = requests.get('http://localhost:8001/modelinfo').json()
-        my_bar = st.progress(float(prediction_response.get('probabilityA', None)), text="Probablity of true vs. false")
-        st.write(prediction_response)
-        st.write(modelinfo_response)
-    
+
+        # Display prediction information
+        st.subheader("Prediction Result")
+        st.write(f"Prediction: {prediction_response['prediction']}")
+        st.write(prediction_response['probabilityA'])
+        st.write(prediction_response['probabilityB'])
+         # Progress bar
+        
+        # Display model information
+        st.subheader("Model Information")
+        st.write(f"Model Type: {modelinfo_response['model_type']}")
+     
+
+       
+        
