@@ -19,11 +19,17 @@ import matplotlib.pyplot as plt
 
 
 
-def choose_training_dataset(undersampled_data, oversampled_data, parameters):
+def choose_training_dataset(undersampled_data, oversampled_data,undersampled_data2, oversampled_data2, parameters):
     if parameters["rebalanced"] == "undersampled":
-        return undersampled_data
+        if undersampled_data is None:
+            return undersampled_data2
+        else:
+            return undersampled_data
     else:
-        return oversampled_data
+        if oversampled_data is None:
+            return oversampled_data2
+        else:
+            return oversampled_data
 
 
 def split_train_test(data, parameters):

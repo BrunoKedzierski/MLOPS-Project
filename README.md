@@ -8,19 +8,21 @@ conda env create -f environment.yml
 
 3. run python launcher.py script from command line
 
-4. Streamlit app will be open in browser and you will be able to manage software from this web panel.
+4. Streamlit app will be open in browser on URL http://localhost:8001/ and you will be able to manage software from this web panel.
 
-// Dopisać URL !!!!
+
 
 
 Technologies:
 - Python : all informations are in environment.yml file for conda. Below are also some of the most important python packages.
 	- fastapi - exchanging informations with server
 	- kedro - way of managing machine learning model. https://kedro.org/
-	- kedro-viz -
-	- sdv - for synthetic data
+	- kedro-viz - It visualises the pipelines in a Kedro project by showing data, nodes, and the connections between them.
+	- sdv -python framework created to generate synthetic data.
 	- streamlit for web panel to change learning parameters and to test results.
 	- pandas - managing dataframes
+	- fastAPI - web framework for building APIs with Python 3.8+ based on standard Python type hints.
 
-- Wandb : website for creating and managing machine learning models. We use it also as database.
- // gdzie znaleźć - url
+- Wandb : website for creating and managing machine learning models. We use it also as database. The URL of our project is https://wandb.ai/asi_grupa_3
+	  ask your supervisor to get added to team or to access the token.
+ 

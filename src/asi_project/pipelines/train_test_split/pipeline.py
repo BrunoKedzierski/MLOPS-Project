@@ -10,7 +10,7 @@ def create_pipeline(**kwargs) -> Pipeline:
     return pipeline([
          node(
                 func=choose_training_dataset,
-                inputs=["preprocessed_undersampled_bank","preprocessed_oversampled_bank","params:dataset_choice"],
+                inputs=["preprocessed_undersampled_bank","preprocessed_oversampled_bank","preprocessed_oversampled_bank2","preprocessed_undersampled_bank2","params:dataset_choice"],
                 outputs='data',
                 name="choose_dataset",
             ),

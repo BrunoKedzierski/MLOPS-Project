@@ -4,11 +4,22 @@ generated using Kedro 0.18.14
 """
 import pandas
 import pandas as pd
+from sdv.metadata import SingleTableMetadata
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.impute import SimpleImputer
 from imblearn.under_sampling import RandomUnderSampler
 from imblearn.over_sampling import RandomOverSampler
 import numpy as np
+from sdv.single_table import GaussianCopulaSynthesizer
+import pandas
+import pandas as pd
+from sklearn.preprocessing import OrdinalEncoder
+from sklearn.impute import SimpleImputer
+from imblearn.under_sampling import RandomUnderSampler
+from imblearn.over_sampling import RandomOverSampler
+import numpy as np
+
+
 
 
 def load_data():
@@ -57,10 +68,32 @@ def encode_data(data):
 
 
 def preprocess_data(data):
-    print(data["contact"].unique())
     dataChanged = drop_impute_missing_data(data)
+    synthetic_data = synthetic(dataChanged, 1000)
+
+    print("DATA CHANGED ///////////////////////")
+    print(dataChanged)
+    print("DATA CHANGED ///////////////////////")
+    print(synthetic_data)
+
     dataChanged, enc = encode_data(dataChanged)
     oversampled, undersampled = rebalance_data(dataChanged)
 
 
+    # dataframe = pandas.DataFrame.join(dataChanged, synthetic_data)
+
+    # print(dataframe)
+
     return oversampled, undersampled, enc, dataChanged
+
+
+def synthetic(data, rows):
+    metadata = SingleTableMetadata()
+    metadata.detect_from_dataframe(data)
+    synthesizer = GaussianCopulaSynthesizer(metadata)
+    synthesizer.fit(data)
+    synthetic_data = synthesizer.sample(num_rows=rows)
+    return synthetic_data
+
+
+preprocess_data(load_data())
