@@ -1,5 +1,5 @@
 # ASI_Grupa3
-## Dataset Banck Churn
+## Dataset Bank Churn
 
 ![diagram](https://github.com/BrunoKedzierski/MLOPS-Project/assets/40804691/08b0b1bb-37f1-4a1e-b7c0-26231a8f3bde)
 
